@@ -51,4 +51,8 @@ document
   .getElementById("callFunction")
   .addEventListener("click", getMessages);
 
+  document
+  .getElementById("add-msg-btn")
+  .addEventListener("click", postMessage);
+
 // To begin try adding another button to use the postMessage function

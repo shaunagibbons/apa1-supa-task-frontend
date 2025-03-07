@@ -1,21 +1,58 @@
+@font-face {
+  font-family: 'FinkHeavy';
+  src: url('FinkHeavy.woff2') format('woff2'),
+      url('FinkHeavy.woff') format('woff');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-  }
-  button {
-    padding: 10px 15px;
-    background: #3ecf8e;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background-image: url('/images/nook-ac-background.webp'); /* Correct path */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    font-family: 'FinkHeavy', sans-serif; /* AC-style font */
+    color: #4C4A48; /* Soft text color */
+}
+
+h1 {
+  color: #E7B14C; /* Bell Gold */
+  text-shadow: 5px 5px 0px #6B8E23; /* Soft Leaf Green Shadow */
+  font-size: 100px; /* Adjust text size */
+  text-align: center; /* Center text horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+    background-color: #9bcc50; /* Green pastel */
+    border: 3px solid #597D35;
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #fff;
     cursor: pointer;
-  }
-  #result {
+    box-shadow: 4px 4px 0px #597D35;
+    transition: all 0.2s ease-in-out;
+    font-family: 'FinkHeavy', sans-serif;
+}
+
+button:hover {
+    background-color: #bde87b;
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+#result {
     margin-top: 20px;
     padding: 15px;
     border-radius: 4px;
     border: 1px solid #ddd;
     background: #f9f9f9;
-  }
+}

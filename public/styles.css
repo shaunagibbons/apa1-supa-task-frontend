@@ -210,48 +210,34 @@ input {
     margin: 20px auto;
 }
 
-/* Styling the search input */
-#search input {
+/* Container for the search bar */
+#fish-search {
+    display: flex;
+    justify-content: center; /* Centers the input */
+    align-items: center;
     width: 100%;
-    padding: 10px;
-    border: 2px solid #7ac74f; /* Leafy green border */
-    border-radius: 12px;
-    font-size: 16px;
-    font-family: 'FinkHeavy', sans-serif; /* Animal Crossing font */
-    background-color: #ffffff; /* White background for the input */
-    color: #4C4A48; /* Soft text color */
-    transition: border-color 0.3s ease;
+    padding: 10px 0; /* Adds vertical spacing */
 }
 
-/* Focus effect for input */
-#search input:focus {
-    border-color: #efad33; /* Gold color when focused */
-    outline: none;
-    box-shadow: 0 0 5px rgba(239, 173, 51, 0.5); /* Glow effect */
-}
-
-/* Styling the search button */
-#search button {
-    background-color: #9bcc50; /* Pastel green */
-    border: 2px solid #597D35; /* Green border */
-    border-radius: 12px;
-    padding: 10px 15px;
-    margin-left: 10px;
+/* Styling the search input */
+#fish-search input {
+    width: 100%; /* Ensures it stays within its container */
+    max-width: 400px; /* Sets a reasonable max width */
+    padding: 12px;
+    border: 3px solid #7ac74f; /* Leafy green border */
+    border-radius: 20px;
     font-size: 18px;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    font-family: 'FinkHeavy', sans-serif; /* Animal Crossing font */
+    background-color: #ffffff; /* White background */
+    color: #4C4A48; /* Soft text color */
+    text-align: center; /* Centers placeholder text */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Button hover effect */
-#search button:hover {
-    background-color: #bde87b; /* Lighter green on hover */
-    transform: scale(1.1); /* Slightly increase size on hover */
-}
-
-/* Button focus effect */
-#search button:focus {
+/* Focus effect */
+#fish-search input:focus {
+    border-color: #efad33; /* Gold color on focus */
     outline: none;
-    border-color: #efad33; /* Gold border on focus */
-    box-shadow: 0 0 5px rgba(239, 173, 51, 0.5); /* Gold glow */
+    box-shadow: 0 0 8px rgba(239, 173, 51, 0.5); /* Soft glowing effect */
 }
+

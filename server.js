@@ -75,6 +75,53 @@ app.post('/api/fish', async (req, res) => {
   }
 });
 
+app.put("/api/fish", async (req, res) => {
+  try {
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/fish`, {
+      method: "PUT",
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(req.body),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: data.error });
+    }
+
+    res.json(data);
+  } catch (error) {
+    console.error("Error updating fish:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+app.delete("/api/fish", async (req, res) => {
+  try {
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/fish`, {
+      method: "DELETE",
+      headers: {
+        'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(req.body),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      return res.status(response.status).json({ error: data.error });
+    }
+
+    res.json(data);
+  } catch (error) {
+    console.error("Error deleting fish:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // Start server
 app.listen(PORT, () => {

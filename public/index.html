@@ -3,26 +3,28 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task 2 Starter Template</title>
+    <title>Animal Crossing Critterpedia</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Animal Crossing Critterpedia</h1>    
-    
-    <form id="addFish">
-      <input type="text" id="Name" placeholder="Fish Name" value="New Fish" required>
-      <input type="number" id="Sell" placeholder="Sell Price" value="100" required>
-      <input type="text" id="Shadow" placeholder="Shadow Size" value="xs" required>
-      <input type="text" id="Where" placeholder="Location" value="pond" required>
+    <h1>Animal Crossing Critterpedia</h1>  
+      <button class="base-button" id="callFish">Show Fish</button>
+
+    <form class="base-button" id="addFish">
+      <input type="text" id="Name" placeholder="Fish Name" required>
+      <input type="number" id="Sell" placeholder="Sell Price" required>
+      <input type="text" id="Shadow" placeholder="Shadow Size" required>
+      <input type="text" id="Where" placeholder="Location" required>
       <button type="submit">Add Fish</button>
     </form>
+
     
+
     <div id="message"></div>
-    <button id="callFish">Fish</button>
+   
     <div id="result">Results will appear here...</div>
 
-
-    
     <script src="client.js"></script>
   </body>
 </html>
+

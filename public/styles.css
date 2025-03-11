@@ -1,10 +1,10 @@
 @font-face {
-  font-family: 'FinkHeavy';
-  src: url('FinkHeavy.woff2') format('woff2'),
-      url('FinkHeavy.woff') format('woff');
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
+    font-family: 'FinkHeavy';
+    src: url('FinkHeavy.woff2') format('woff2'),
+         url('FinkHeavy.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
 }
 
 body {
@@ -20,13 +20,13 @@ body {
 }
 
 h1 {
-  color: #efad33; /* Bell Gold */
-  text-shadow: 5px 5px 0px #6B8E23; /* Soft Leaf Green Shadow */
-  font-size: 100px; /* Adjust text size */
-  text-align: center; /* Center text horizontally */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    color: #efad33; /* Bell Gold */
+    text-shadow: 5px 5px 0px #6B8E23; /* Soft Leaf Green Shadow */
+    font-size: 100px; /* Adjust text size */
+    text-align: center; /* Center text horizontally */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 button {
@@ -41,13 +41,72 @@ button {
     margin-bottom: 20px;
     box-shadow: 4px 4px 0px #597D35;
     transition: all 0.2s ease-in-out;
-    font-family: 'FinkHeavy', sans-serif;
+    font-family: 'FinkHeavy', sans-serif; 
 }
 
-button:hover {
+/* Base Button Styles */
+button.base-button {
+    background-color: #9bcc50; /* Green pastel */
+    border: 3px solid #597D35;
+    color: white;
+}
+
+button.base-button:hover {
     background-color: #bde87b;
     box-shadow: none;
     transform: translateY(4px);
+}
+
+/* Update Fish Button */
+button.updateFishButton {
+    background-color: #ffb74d; /* Warm orange */
+    border: 3px solid #e67e22;
+    box-shadow: 4px 4px 0px #d35400;
+}
+
+button.updateFishButton:hover {
+    background-color: #ffcc80;
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+/* Delete Fish Button */
+button.deleteFishButton {
+    background-color: #ff6f61; /* Red-Orange */
+    border: 3px solid #d84f3d;
+    box-shadow: 4px 4px 0px #c0392b;
+}
+
+button.deleteFishButton:hover {
+    background-color: #ff8a80;
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+/* Form Styling */
+form {
+    background: rgba(255, 250, 229, 0.95); /* Soft AC-like menu background */
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 90%;
+    max-width: 400px;
+    margin: 20px auto;
+    border: 3px solid #7ac74f;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    border: 2px solid #597D35;
+    border-radius: 8px;
+    font-size: 16px;
+    font-family: 'FinkHeavy', sans-serif;
+    text-align: center;
 }
 
 #result {
@@ -56,10 +115,11 @@ button:hover {
     flex-wrap: wrap;  /* Allows items to wrap onto new lines */
     gap: 16px;  /* Space between cards */
     justify-content: center; /* Centers the cards */
-  }
+}
 
+/* Fish Card Styling */
 .fish-card {
-    flex: 1 1 250px;  /* Flexible width but not smaller than 250px */
+    flex: 1 1 300px;  /* Flexible width but not smaller than 250px */
     max-width: 300px; 
     background: #fffae5; /* Warm soft background like AC menus */
     border-radius: 15px;
@@ -69,25 +129,49 @@ button:hover {
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
     border: 3px solid #7ac74f; /* Leafy green border */
-  }
-  
-  .fish-card:hover {
+}
+
+.fish-card:hover {
     transform: scale(1.05);
-  }
-  
-  .fish-card h3 {
+}
+
+.fish-card h3 {
     font-size: 20px;
     color: #4a683f; /* Natural green */
-  }
-  
-  .fish-card p {
+}
+
+.fish-card p {
     font-size: 14px;
     color: #5a5a5a;
-  }
-  
-  .fish-card::after {
+}
+
+.fish-card::after {
     content: "🎣"; /* Fishing rod emoji for extra Animal Crossing vibes */
     display: block;
     font-size: 24px;
     margin-top: 10px;
-  }
+}
+
+/* Update Fish Section */
+h2 {
+    color: #efad33; /* Matching gold tone */
+    text-shadow: 3px 3px 0px #6B8E23; /* Soft Leaf Green Shadow */
+    font-size: 28px;
+    text-align: center;
+}
+
+#updateFish {
+    background: rgba(255, 250, 229, 0.95); /* Soft warm tone */
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    border: 3px solid #7ac74f;
+}
+

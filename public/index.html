@@ -8,10 +8,19 @@
   </head>
   <body>
     <h1>Animal Crossing Critterpedia</h1>
-    <button id="callFunction">Call Function</button>
-    <button id="add-msg-btn">Add Message</button>
+    <button id="callFish">Fish</button>
     <div id="result">Results will appear here...</div>
 
+    <form id="fishForm">
+      <input type="text" id="name" placeholder="Fish Name" required>
+      <input type="number" id="sell" placeholder="Sell Price" required>
+      <input type="text" id="shadow" placeholder="Shadow Size" required>
+      <input type="text" id="where" placeholder="Location" required>
+      <button type="submit">Add Fish</button>
+    </form>
+    
+    <div id="message"></div>
+    
     <script src="client.js"></script>
   </body>
 </html>

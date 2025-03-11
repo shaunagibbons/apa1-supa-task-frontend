@@ -1,11 +1,11 @@
 // Writing a function to communicate with our local server
 
-const getMessages = async () => {
+const getFish = async () => {
   const resultElement = document.getElementById("result");
   resultElement.textContent = "Loading...";
 
   try {
-    const response = await fetch(`/api/messages`, {
+    const response = await fetch(`http://localhost:3000/api/fish`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -17,31 +17,20 @@ const getMessages = async () => {
     }
 
     const data = await response.json();
-    resultElement.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-  } catch (error) {
-    resultElement.textContent = `Error: ${error.message}`;
-  }
-};
+    resultElement.innerHTML = "";
+    data.forEach(fish => {
+      const card = document.createElement("div");
+      card.classList.add("fish-card");
 
-const postMessage = async () => {
-  const resultElement = document.getElementById("result");
-  resultElement.textContent = "Loading...";
+      card.innerHTML = `
+        <h3>${fish.Name}</h3>
+        <p><strong>Sell Price:</strong> ${fish.Sell}</p>
+        <p><strong>Shadow Size:</strong> ${fish.Shadow}</p>
+        <p><strong>Location:</strong> ${fish.Where}</p>
+      `;
 
-  try {
-    const response = await fetch(`/api/new_message`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ message: "If you can see this POST is working :)" }),
+      resultElement.appendChild(card);
     });
-
-    if (!response.ok) {
-      throw new Error(`Error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    resultElement.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
   } catch (error) {
     resultElement.textContent = `Error: ${error.message}`;
   }
@@ -72,8 +61,8 @@ const postMessage = async () => {
 // };
 
 document
-  .getElementById("callFunction")
-  .addEventListener("click", getMessages);
+  .getElementById("callFish")
+  .addEventListener("click", getFish);
 
   document
   .getElementById("add-msg-btn")

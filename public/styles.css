@@ -20,7 +20,7 @@ body {
 }
 
 h1 {
-  color: #E7B14C; /* Bell Gold */
+  color: #efad33; /* Bell Gold */
   text-shadow: 5px 5px 0px #6B8E23; /* Soft Leaf Green Shadow */
   font-size: 100px; /* Adjust text size */
   text-align: center; /* Center text horizontally */
@@ -38,6 +38,7 @@ button {
     font-weight: bold;
     color: #fff;
     cursor: pointer;
+    margin-bottom: 20px;
     box-shadow: 4px 4px 0px #597D35;
     transition: all 0.2s ease-in-out;
     font-family: 'FinkHeavy', sans-serif;
@@ -50,9 +51,43 @@ button:hover {
 }
 
 #result {
-    margin-top: 20px;
-    padding: 15px;
-    border-radius: 4px;
-    border: 1px solid #ddd;
-    background: #f9f9f9;
-}
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;  /* Allows items to wrap onto new lines */
+    gap: 16px;  /* Space between cards */
+    justify-content: center; /* Centers the cards */
+  }
+
+.fish-card {
+    flex: 1 1 250px;  /* Flexible width but not smaller than 250px */
+    max-width: 300px; 
+    background: #fffae5; /* Warm soft background like AC menus */
+    border-radius: 15px;
+    padding: 16px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+    border: 3px solid #7ac74f; /* Leafy green border */
+  }
+  
+  .fish-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .fish-card h3 {
+    font-size: 20px;
+    color: #4a683f; /* Natural green */
+  }
+  
+  .fish-card p {
+    font-size: 14px;
+    color: #5a5a5a;
+  }
+  
+  .fish-card::after {
+    content: "🎣"; /* Fishing rod emoji for extra Animal Crossing vibes */
+    display: block;
+    font-size: 24px;
+    margin-top: 10px;
+  }

@@ -42,11 +42,11 @@ app.post('/api/new_message', async (req, res) => {
 });
 
 // New GET endpoint
-app.get('/api/messages', async (req, res) => {
+app.get('/api/fish', async (req, res) => {
   try {
 
     // Call the Supabase Edge Function for messages
-    const response = await fetch(`${SUPABASE_URL}/functions/v1/messages`, {
+    const response = await fetch(`${SUPABASE_URL}/functions/v1/fish`, {
       method: 'GET',
       headers: {
         'Authorization': `Bearer ${SUPABASE_ANON_KEY}`

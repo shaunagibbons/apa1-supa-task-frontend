@@ -7,19 +7,21 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <h1>Animal Crossing Critterpedia</h1>
-    <button id="callFish">Fish</button>
-    <div id="result">Results will appear here...</div>
-
-    <form id="fishForm">
-      <input type="text" id="name" placeholder="Fish Name" required>
-      <input type="number" id="sell" placeholder="Sell Price" required>
-      <input type="text" id="shadow" placeholder="Shadow Size" required>
-      <input type="text" id="where" placeholder="Location" required>
+    <h1>Animal Crossing Critterpedia</h1>    
+    
+    <form id="addFish">
+      <input type="text" id="Name" placeholder="Fish Name" value="New Fish" required>
+      <input type="number" id="Sell" placeholder="Sell Price" value="100" required>
+      <input type="text" id="Shadow" placeholder="Shadow Size" value="xs" required>
+      <input type="text" id="Where" placeholder="Location" value="pond" required>
       <button type="submit">Add Fish</button>
     </form>
     
     <div id="message"></div>
+    <button id="callFish">Fish</button>
+    <div id="result">Results will appear here...</div>
+
+
     
     <script src="client.js"></script>
   </body>

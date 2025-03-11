@@ -18,7 +18,7 @@ const getFish = async () => {
 
     const data = await response.json();
     resultElement.innerHTML = "";
-    data.forEach(fish => {
+    data.forEach((fish) => {
       const card = document.createElement("div");
       card.classList.add("fish-card");
 
@@ -36,40 +36,86 @@ const getFish = async () => {
   }
 };
 
-// const updateMessage = async () => {
-//   const resultElement = document.getElementById("result");
-//   resultElement.textContent = "Loading...";
+const addFish = async (event) => {
+  event.preventDefault();
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = "Loading...";
 
-//   try {
-//     const response = await fetch(`/api/messages`, {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json",
-//       },
-//       body: JSON.stringify({ message: "The message has been updated" }),
-//     });
+  const fish = {
+    Name: document.getElementById("Name").value,
+    Sell: document.getElementById("Sell").value,
+    Shadow: document.getElementById("Shadow").value,
+    Where: document.getElementById("Where").value,
+  };
 
-//     if (!response.ok) {
-//       throw new Error(`Error: ${response.status}`);
-//     }
+  try {
+    const response = await fetch(`http://localhost:3000/api/fish`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(fish)
+    });
 
-//     const data = await response.json();
-//     resultElement.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
-//   } catch (error) {
-//     resultElement.textContent = `Error: ${error.message}`;
-//   }
-// };
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
 
-document
-  .getElementById("callFish")
-  .addEventListener("click", getFish);
+    const data = await response.json();
+    console.log(data)
+  } catch (error) {
+    resultElement.textContent = `Error: ${error.message}`;
+  }
+};
 
-  document
-  .getElementById("add-msg-btn")
-  .addEventListener("click", postMessage);
+const getMessages = async () => {
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = "Loading...";
 
-  document
-  .getElementById("update-msg-btn")
-  .addEventListener("click", updateMessage);
+  try {
+    const response = await fetch(`/api/messages`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
 
-// To begin try adding another button to use the postMessage function
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    resultElement.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+  } catch (error) {
+    resultElement.textContent = `Error: ${error.message}`;
+  }
+};
+
+const postMessage = async () => {
+  const resultElement = document.getElementById("result");
+  resultElement.textContent = "Loading...";
+
+  try {
+    const response = await fetch(`/api/new_message`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: "If you can see this POST is working :)",
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    resultElement.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+  } catch (error) {
+    resultElement.textContent = `Error: ${error.message}`;
+  }
+};
+
+document.getElementById("callFish").addEventListener("click", getFish);
+document.getElementById("addFish").addEventListener("click", addFish);

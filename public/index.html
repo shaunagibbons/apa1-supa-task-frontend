@@ -8,7 +8,6 @@
   </head>
   <body>
     <h1>Animal Crossing Critterpedia</h1>  
-      <button class="base-button" id="callFish">Show Fish</button>
 
     <form class="base-button" id="addFish">
       <input type="text" id="Name" placeholder="Fish Name" required>
@@ -18,11 +17,13 @@
       <button type="submit">Add Fish</button>
     </form>
 
-    
-
     <div id="message"></div>
-   
-    <div id="result">Results will appear here...</div>
+ 
+    <div id="fish-search">
+      <input id="fish-search-input" type="text" id="Name" placeholder="Search For A Fish" required>
+    </div> 
+
+    <div id="result"></div>
 
     <script src="client.js"></script>
   </body>

@@ -1,3 +1,4 @@
+/* Font Face */
 @font-face {
     font-family: 'FinkHeavy';
     src: url('FinkHeavy.woff2') format('woff2'),
@@ -7,30 +8,32 @@
     font-display: swap;
 }
 
+/* General Body Styles */
 body {
-    max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-image: url('/images/nook-ac-background.webp'); /* Correct path */
+    background-image: url('/images/nook-ac-background.webp');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    font-family: 'FinkHeavy', sans-serif; /* AC-style font */
-    color: #4C4A48; /* Soft text color */
+    font-family: 'FinkHeavy', sans-serif;
+    color: #4C4A48;
 }
 
+/* Heading Styles */
 h1 {
-    color: #efad33; /* Bell Gold */
-    text-shadow: 5px 5px 0px #6B8E23; /* Soft Leaf Green Shadow */
-    font-size: 100px; /* Adjust text size */
-    text-align: center; /* Center text horizontally */
+    color: #efad33;
+    text-shadow: 5px 5px 0px #6B8E23;
+    font-size: 100px;
+    text-align: center;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
+/* Button Styles */
 button {
-    background-color: #9bcc50; /* Green pastel */
+    background-color: #9bcc50;
     border: 3px solid #597D35;
     border-radius: 12px;
     padding: 10px 20px;
@@ -40,52 +43,42 @@ button {
     cursor: pointer;
     margin-bottom: 20px;
     box-shadow: 4px 4px 0px #597D35;
-    transition: all 0.2s ease-in-out;
-    font-family: 'FinkHeavy', sans-serif; 
+    transition: all 0.3s ease;
+    font-family: 'FinkHeavy', sans-serif;
+}
+
+/* Unified Hover Effect for All Buttons */
+button:hover {
+    background-color: #bde87b; /* Lighter green */
+    box-shadow: none;
+    transform: translateY(4px);
 }
 
 /* Base Button Styles */
 button.base-button {
-    background-color: #9bcc50; /* Green pastel */
+    background-color: #9bcc50;
     border: 3px solid #597D35;
     color: white;
 }
 
-button.base-button:hover {
-    background-color: #bde87b;
-    box-shadow: none;
-    transform: translateY(4px);
-}
-
 /* Update Fish Button */
 button.updateFishButton {
-    background-color: #ffb74d; /* Warm orange */
+    background-color: #ffb74d;
     border: 3px solid #e67e22;
     box-shadow: 4px 4px 0px #d35400;
 }
 
-button.updateFishButton:hover {
-    background-color: #ffcc80;
-    box-shadow: none;
-    transform: translateY(4px);
-}
-
 /* Delete Fish Button */
 button.deleteFishButton {
-    background-color: #ff6f61; /* Red-Orange */
+    background-color: #ff6f61;
     border: 3px solid #d84f3d;
     box-shadow: 4px 4px 0px #c0392b;
-}
-
-button.deleteFishButton:hover {
-    background-color: #ff8a80;
-    box-shadow: none;
-    transform: translateY(4px);
+    margin-left: 3px;
 }
 
 /* Form Styling */
 form {
-    background: rgba(255, 250, 229, 0.95); /* Soft AC-like menu background */
+    background: rgba(255, 250, 229, 0.95);
     padding: 15px;
     border-radius: 12px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
@@ -99,6 +92,7 @@ form {
     border: 3px solid #7ac74f;
 }
 
+/* Input Styling */
 input {
     width: 90%;
     padding: 10px;
@@ -109,35 +103,45 @@ input {
     text-align: center;
 }
 
+/* Result Section Styles */
 #result {
-    margin-top: 40px;
     display: flex;
-    flex-wrap: wrap;  /* Allows items to wrap onto new lines */
-    gap: 16px;  /* Space between cards */
-    justify-content: center; /* Centers the cards */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    background-color: rgba(153, 234, 217, 0.3); /* ACNH Blue with 80% opacity */
+    border: 3px solid rgba(66, 207, 202, 0.3); /* Slightly darker blue for contrast */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    margin: 0 auto;
+    backdrop-filter: blur(5px); /* Soft blur effect for a dreamy UI */
 }
+
 
 /* Fish Card Styling */
 .fish-card {
-    flex: 1 1 300px;  /* Flexible width but not smaller than 250px */
-    max-width: 300px; 
-    background: #fffae5; /* Warm soft background like AC menus */
+    flex: 1 1 300px;
+    max-width: 300px;
+    background: #fffae5;
     border-radius: 15px;
     padding: 16px;
-    width: 250px;
     text-align: center;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease-in-out;
-    border: 3px solid #7ac74f; /* Leafy green border */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid #7ac74f;
 }
 
 .fish-card:hover {
     transform: scale(1.05);
+    box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
 }
 
+/* Fish Card Text Styling */
 .fish-card h3 {
     font-size: 20px;
-    color: #4a683f; /* Natural green */
+    color: #4a683f;
 }
 
 .fish-card p {
@@ -145,8 +149,9 @@ input {
     color: #5a5a5a;
 }
 
+/* Fish Card Extra Icon */
 .fish-card::after {
-    content: "🎣"; /* Fishing rod emoji for extra Animal Crossing vibes */
+    content: "🎣";
     display: block;
     font-size: 24px;
     margin-top: 10px;
@@ -154,14 +159,14 @@ input {
 
 /* Update Fish Section */
 h2 {
-    color: #efad33; /* Matching gold tone */
-    text-shadow: 3px 3px 0px #6B8E23; /* Soft Leaf Green Shadow */
+    color: #efad33;
+    text-shadow: 3px 3px 0px #6B8E23;
     font-size: 28px;
     text-align: center;
 }
 
 #updateFish {
-    background: rgba(255, 250, 229, 0.95); /* Soft warm tone */
+    background: rgba(255, 250, 229, 0.95);
     padding: 15px;
     border-radius: 12px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
@@ -175,3 +180,78 @@ h2 {
     border: 3px solid #7ac74f;
 }
 
+/* Accessibility Improvements (Contrast & Focus) */
+button:focus, input:focus {
+    outline: none;
+    border-color: #efad33;
+    box-shadow: 0 0 5px rgba(239, 173, 51, 0.5);
+}
+
+input {
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input {
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+/* Container for the search bar */
+#search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fffae5; /* Light pastel background */
+    border-radius: 20px;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+}
+
+/* Styling the search input */
+#search input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #7ac74f; /* Leafy green border */
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: 'FinkHeavy', sans-serif; /* Animal Crossing font */
+    background-color: #ffffff; /* White background for the input */
+    color: #4C4A48; /* Soft text color */
+    transition: border-color 0.3s ease;
+}
+
+/* Focus effect for input */
+#search input:focus {
+    border-color: #efad33; /* Gold color when focused */
+    outline: none;
+    box-shadow: 0 0 5px rgba(239, 173, 51, 0.5); /* Glow effect */
+}
+
+/* Styling the search button */
+#search button {
+    background-color: #9bcc50; /* Pastel green */
+    border: 2px solid #597D35; /* Green border */
+    border-radius: 12px;
+    padding: 10px 15px;
+    margin-left: 10px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+/* Button hover effect */
+#search button:hover {
+    background-color: #bde87b; /* Lighter green on hover */
+    transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Button focus effect */
+#search button:focus {
+    outline: none;
+    border-color: #efad33; /* Gold border on focus */
+    box-shadow: 0 0 5px rgba(239, 173, 51, 0.5); /* Gold glow */
+}

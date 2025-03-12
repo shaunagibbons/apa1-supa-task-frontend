@@ -1,46 +1,47 @@
 let fishArr = [];
 let filteredFishArr = [];
 
-const getFish = async () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("DOM fully loaded, calling getFish()...");
+  await getFish();
+});
+
+document.getElementById("result").addEventListener("click", ({ target }) => {
+  const fishId = target.dataset.fishId;
+  if (target.classList.contains("toggleUpdateFish")) handleToggleUpdateFish(fishId);
+  else if (target.classList.contains("updateFishButton")) updateFish(fishId);
+  else if (target.classList.contains("deleteFishButton")) deleteFish(fishId);
+});
+
+document.getElementById("addFish").addEventListener("submit", addFish);
+document.getElementById("fish-search").addEventListener("input", filterFish);
+
+async function getFish() {
   const resultElement = document.getElementById("result");
   resultElement.textContent = "Loading...";
-
+  
   try {
-    const response = await fetch(`http://localhost:3000/api/fish`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
+    const response = await fetch("http://localhost:3000/api/fish");
     if (!response.ok) throw new Error(`Error: ${response.status}`);
-
-    const data = await response.json();
-
-    for (let fish of data) fishArr.push(fish);
-
-    filteredFishArr = fishArr;
-
+    
+    fishArr = await response.json();
+    filteredFishArr = [...fishArr];
     displayFish();
   } catch (error) {
     resultElement.textContent = `Error: ${error.message}`;
   }
-};
+}
 
-const displayFish = () => {
+function displayFish() {
   const resultElement = document.getElementById("result");
-  resultElement.innerHTML = ""; // Clear previous results
+  resultElement.innerHTML = "";
+  filteredFishArr.forEach(fish => resultElement.appendChild(createFishCard(fish)));
+}
 
-  filteredFishArr.forEach((fish) => {
-    const card = createFishCard(fish);
-    resultElement.appendChild(card);
-  });
-};
-
-const createFishCard = (fish) => {
+function createFishCard(fish) {
   const card = document.createElement("div");
   card.classList.add("fish-card");
-
+  
   card.innerHTML = `
     <h3>${fish.Name}</h3>
     <p><strong>Sell Price:</strong> ${fish.Sell}</p>
@@ -48,153 +49,78 @@ const createFishCard = (fish) => {
     <p><strong>Location:</strong> ${fish.Where}</p>
     <button type="button" class="toggleUpdateFish" data-fish-id="${fish.Id}">Update Fish</button>
     <form class="updateFishForm" data-fish-id="${fish.Id}" style="display: none;">
-      <div class="form-input">
-          <label for="updateName-${fish.Id}">Name</label>
-          <input type="text" id="updateName-${fish.Id}" class="updateName" value="${fish.Name}" required>
-      </div>
-      <div class="form-input">
-          <label for="updateSell-${fish.Id}">Sell Price</label>
-          <input type="number" id="updateSell-${fish.Id}" class="updateSell" value="${fish.Sell}" required>
-      </div>
-      <div class="form-input">
-          <label for="updateShadow-${fish.Id}">Shadow Size</label>
-          <input type="text" id="updateShadow-${fish.Id}" class="updateShadow" value="${fish.Shadow}" required>
-      </div>
-      <div class="form-input">
-          <label for="updateWhere-${fish.Id}">Where Found</label>
-          <input type="text" id="updateWhere-${fish.Id}" class="updateWhere" value="${fish.Where}" required>
-      </div>
+      ${createFormInputs(fish)}
       <button type="button" class="updateFishButton" data-fish-id="${fish.Id}">Submit</button>
     </form>
-
-    <button type="button" class="deleteFishButton" data-fish-id="${fish.Id}">Delete Fish</button> <!-- Add delete button -->
+    <button type="button" class="deleteFishButton" data-fish-id="${fish.Id}">Delete Fish</button>
   `;
-
+  
   return card;
-};
+}
 
-const handleToggleUpdateFish = (fishId) => {
-  console.log(fishId);
-  const updateForm = document.querySelector(
-    `.updateFishForm[data-fish-id="${fishId}"]`
-  );
-  if (updateForm) {
-    updateForm.style.display =
-      updateForm.style.display === "none" ? "block" : "none";
-  }
-};
+function createFormInputs(fish) {
+  return ["Name", "Sell", "Shadow", "Where"].map(field => `
+    <div class="form-input">
+      <label for="update${field}-${fish.Id}">${field}</label>
+      <input type="${field === "Sell" ? "number" : "text"}" id="update${field}-${fish.Id}" class="update${field}" value="${fish[field]}" required>
+    </div>
+  `).join("");
+}
 
-const updateFish = async (fishId) => {
-  const form = document.querySelector(
-    `.updateFishForm[data-fish-id="${fishId}"]`
-  );
+function handleToggleUpdateFish(fishId) {
+  const updateForm = document.querySelector(`.updateFishForm[data-fish-id="${fishId}"]`);
+  if (updateForm) updateForm.style.display = updateForm.style.display === "none" ? "block" : "none";
+}
 
+async function updateFish(fishId) {
+  const form = document.querySelector(`.updateFishForm[data-fish-id="${fishId}"]`);
   if (!form) return alert("Form not found!");
-
-  // Get form values
-  const { name, sell, shadow, location } = getFormValues(form);
-  if (hasEmptyFields(name, sell, shadow, location))
-    return alert("All fields are required!");
-
+  
+  const { Name, Sell, Shadow, Where } = getFormValues(form);
+  if ([Name, Sell, Shadow, Where].some(field => !field)) return alert("All fields are required!");
+  
   try {
-    const response = await fetch(`http://localhost:3000/api/fish`, {
+    const response = await fetch("http://localhost:3000/api/fish", {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        Id: fishId,
-        Name: name,
-        Sell: sell,
-        Shadow: shadow,
-        Where: location,
-      }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Id: fishId, Name, Sell, Shadow, Where })
     });
-
-    const data = await response.json();
-    if (!response.ok) throw new Error(data.error || "Failed to update fish.");
-
+    
+    if (!response.ok) throw new Error((await response.json()).error || "Failed to update fish.");
     alert("Fish updated successfully!");
-    getFish(); // Refresh the fish list after update
+    getFish();
   } catch (error) {
     alert(`Error updating fish: ${error.message}`);
   }
-};
+}
 
-const deleteFish = async (fishId) => {
-  const confirmed = window.confirm(
-    "Are you sure you want to delete this fish?"
-  );
-
-  if (!confirmed) {
-    return;
-  }
-
+async function deleteFish(fishId) {
+  if (!window.confirm("Are you sure you want to delete this fish?")) return;
+  
   try {
-    const response = await fetch(`http://localhost:3000/api/fish`, {
+    const response = await fetch("http://localhost:3000/api/fish", {
       method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ Id: fishId }),
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ Id: fishId })
     });
-
+    
     if (!response.ok) throw new Error(`Error: ${response.status}`);
-
-    getFish();
     alert("Fish deleted successfully!");
+    getFish();
   } catch (error) {
     alert(`Error deleting fish: ${error.message}`);
   }
-};
+}
 
-const getFormValues = (form) => {
-  return {
-    name: form.querySelector(".updateName").value,
-    sell: form.querySelector(".updateSell").value,
-    shadow: form.querySelector(".updateShadow").value,
-    location: form.querySelector(".updateWhere").value,
-  };
-};
+function getFormValues(form) {
+  return Object.fromEntries(
+    ["Name", "Sell", "Shadow", "Where"].map(field => [field, form.querySelector(`.update${field}`).value])
+  );
+}
 
-const hasEmptyFields = (...fields) => {
-  return fields.some((field) => !field);
-};
-
-document.getElementById("result").addEventListener("click", (event) => {
-  const { target } = event;
-
-  if (target.classList.contains("toggleUpdateFish")) {
-    handleToggleUpdateFish(target.dataset.fishId);
-  } else if (target.classList.contains("updateFishButton")) {
-    updateFish(target.dataset.fishId);
-  } else if (target.classList.contains("deleteFishButton")) {
-    const fishId = target.dataset.fishId;
-    deleteFish(fishId);
-  }
-});
-
-const filterFish = () => {
-  let fishInputStr = document
-    .getElementById("fish-search-input")
-    .value.toLowerCase(); // Get input and convert to lowercase for case-insensitive comparison
-
-  if (!fishInputStr) {
-    filteredFishArr = fishArr;
-  }
-
-  // Filter the fishArr array based on the input
-  filteredFishArr = fishArr.filter((fish) =>
-    fish.Name.toLowerCase().includes(fishInputStr)
-  ); // Compare Name property with input
-
+function filterFish() {
+  const query = document.getElementById("fish-search-input").value.toLowerCase();
+  filteredFishArr = query ? fishArr.filter(fish => fish.Name.toLowerCase().includes(query)) : fishArr;
   displayFish();
-};
+}
 
-document.getElementById("addFish").addEventListener("submit", addFish);
-document.getElementById("fish-search").addEventListener("input", filterFish);
-
-document.addEventListener("DOMContentLoaded", async () => {
-  console.log("DOM fully loaded, calling getFish()...");
-  await getFish(); // this should be called on page load
-});

@@ -91,66 +91,75 @@ Deletes a fish entry.
 
 # Debugging in client.js
 1. DOM Loaded Event
+```
 console.log("DOM fully loaded, calling getFish()...");
-
+```
 Ensures that the script is executed only after the DOM is fully loaded. This is crucial to prevent any issues related to accessing DOM elements that are not yet available.
 
 2. API Call Debugging
-
+```
 console.log("Fetching fish data from API...");
 console.log("Fish data received:", fishArr);
+```
 Tracks when the getFish() function attempts to fetch data from the API and logs the response. This helps verify if the request was successful and if the correct data was received.
 
 3. Event Listener Debugging for Fish Actions
-
+```
 console.log("Filtering fish by query:", query);
 console.log("Updating fish with ID:", fishId);
 console.log("Deleting fish with ID:", fishId);
+```
 Logs key actions (such as filtering, updating, and deleting fish) and the associated data (like query or fish ID). This helps ensure the correct action is being triggered by the user.
 
 4. Error Handling
-
+```
 console.error("Error fetching fish data:", error);
 console.error("Error updating fish:", error);
 console.error("Error deleting fish:", error);
+```
 Logs errors that occur during API calls, allowing you to identify and resolve issues with the server or the request itself.
 
 # Debugging in server.js
 
 1. Logging API Endpoint Access
-
+```
 console.log('GET /api/fish called');
 console.log('POST /api/fish called with body:', req.body);
 console.log('PUT /api/fish called with body:', req.body);
 console.log('DELETE /api/fish called with body:', req.body);
+```
 Logs the access and payload for each of the API endpoints (GET, POST, PUT, DELETE). This ensures that the server is receiving and processing requests as expected.
 
 2. Supabase API Interaction
-
+```
 console.log('Fetched fish data:', data);
 console.log('Fish added successfully:', data);
 console.log('Fish updated successfully:', data);
 console.log('Fish deleted successfully:', data);
+```
 Logs the results of interactions with Supabase (whether data is fetched, added, updated, or deleted). These logs confirm that the server is interacting correctly with Supabase.
 
 3. Error Handling for API Calls
-
+```
 console.error(`Supabase returned ${response.status}: ${response.statusText}`);
 console.error("Error updating fish:", data.error);
 console.error("Error deleting fish:", data.error);
 console.error("GET request error:", error);
 console.error('POST /api/fish error:', error);
 console.error("Error deleting fish:", error);
+```
 Provides detailed error messages if something goes wrong during the interaction with Supabase or any part of the server's API logic. The specific error messages help pinpoint issues with data fetching, validation, or API integration.
 
 4. Validation Warnings
-
+```
 console.warn("POST request missing required fields:", req.body);
+```
 Logs warnings when the incoming request is missing necessary data (e.g., required fields are not provided). This helps identify where user input or client requests may be malformed.
 
 5. Server Start Confirmation
-
+```
 console.log(`Proxy server running on http://localhost:${PORT}`);
+```
 Confirms that the server is running and listening for requests on the specified port.
 
 
